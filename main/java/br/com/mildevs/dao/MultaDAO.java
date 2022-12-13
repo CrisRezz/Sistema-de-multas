@@ -8,10 +8,9 @@ import javax.management.Query;
 import br.com.mildevs.entity.Condutor;
 import br.com.mildevs.entity.Multa;
 import br.com.mildevs.entity.Veiculo;
-import jakarta.persistence.Entity;
+
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Persistence;
-import jakarta.persistence.Table;
 
 
 public class MultaDAO {
@@ -52,10 +51,10 @@ public class MultaDAO {
 		
 		//Listar
 		public List<Multa> listaMultas(){
-			Query query = manager.createQuery("SELECT id"
+			Query query = (Query) manager.createQuery("SELECT id"
 					+ "from multas as m and condutor as c");
 					
-			return query.getResultList();
+			return ((jakarta.persistence.Query) query).getResultList();
 		}
 		
 		

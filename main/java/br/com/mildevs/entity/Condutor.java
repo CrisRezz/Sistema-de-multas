@@ -2,15 +2,16 @@ package br.com.mildevs.entity;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+
+
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+
 
 @Entity
 public class Condutor {
@@ -31,15 +32,9 @@ public class Condutor {
 	private int pontuacao;
 	
 
-	@OneToOne (fetch = FetchType.LAZY)
+	@OneToOne (cascade = CascadeType.REMOVE)
 	@JoinColumn (name = "veiculo", referencedColumnName = "placa")
 	private Veiculo veiculo;
-	
-	
-	
-
-	
-	
 	
 	public Veiculo getVeiculo() {
 		return veiculo;
@@ -85,7 +80,7 @@ public class Condutor {
 	
 	@Override
 	public String toString() {
-		return "\nNumero CNH: " + nroCnh +
+		return "\nNumero CNH: " + getNroCnh() +
 				"\nData de emissão: " + dataEmissao +
 				"\nOrgão emissor: " + orgaoEmissor +
 				"\nPontuação: " + pontuacao;

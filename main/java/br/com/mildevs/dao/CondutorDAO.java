@@ -1,12 +1,10 @@
 package br.com.mildevs.dao;
 
-
 import java.util.List;
 import br.com.mildevs.entity.Condutor;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Persistence;
 import net.bytebuddy.asm.Advice.This;
-
 
 public class CondutorDAO {
 
@@ -18,15 +16,15 @@ public class CondutorDAO {
 
 	// criar
 	public boolean criarCondutor(Condutor condutor) {
-		int nroCnh = condutor.getNroCnh();						
+		int nroCnh = condutor.getNroCnh();
 		Condutor condutorCadastrado = manager.find(Condutor.class, nroCnh);
-		
+
 		if (condutorCadastrado != null) {
 			System.out.println();
 			System.out.println("Esta CNH já está cadastrada!");
 			return false;
 		}
-		
+
 		manager.getTransaction().begin();
 		manager.persist(condutor);
 		manager.getTransaction().commit();
@@ -36,11 +34,12 @@ public class CondutorDAO {
 	// consultar
 
 	public static Condutor consultarCondutor(int Cnh) {
-		return manager.find(Condutor.class,Cnh);
-		
+		return manager.find(Condutor.class, Cnh);
+
 	}
+
 	// Listar
-	public static List<Condutor> listaCondutor(){
+	public static List<Condutor> listaCondutor() {
 		jakarta.persistence.Query query = manager.createQuery("SELECT c from veiculo as c");
 		return query.getResultList();
 	}
@@ -61,8 +60,4 @@ public class CondutorDAO {
 
 	}
 
-	
-	
-	
 }
-

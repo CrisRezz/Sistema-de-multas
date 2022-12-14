@@ -14,11 +14,7 @@ public class Program {
 
 	public static Scanner tc = new Scanner(System.in);
 
-	public static void main(String[] args) {
-
-		CondutorDAO condutorDAO = new CondutorDAO();
-		VeiculoDAO veiculoDAO = new VeiculoDAO();
-		MultaDAO multaDAO  = new MultaDAO();
+	public static void main(String[] args) {;
 
 		System.out.println("-------------------Escolha uma das opções abaixo:\n " + "(1) Informações/alterações sobre Condutores.\n"
 				+ "(2) Informações/aletrações sobre Veiculos.\n" + "(3) Informações/alterações sobre multas.\n"

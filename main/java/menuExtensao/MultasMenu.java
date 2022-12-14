@@ -10,7 +10,6 @@ import br.com.mildevs.entity.Veiculo;
 
 public class MultasMenu {
 
-	private static CondutorDAO condurorDao = new CondutorDAO();
 	private static VeiculoDAO veiculoDAO = new VeiculoDAO();
 	private static MultaDAO multaDAO = new MultaDAO();
 
@@ -32,7 +31,7 @@ public class MultasMenu {
 
 			switch (opcao) {
 			case 1:
-				cadastrarMulta();
+				cadastrarMulta(tc);
 				break;
 
 			case 2:
@@ -63,21 +62,9 @@ public class MultasMenu {
 
 	}
 
-	public static Multa cadastrar(Scanner tc) {
-		Multa multa = new Multa();
-		System.out.print("Valor: ");
-		double valor = tc.nextDouble();
-		System.out.print("Pontuação: ");
-		int pontuacao = tc.nextInt();
-		multa.setValor(valor);
-		multa.setPontuacao(pontuacao);
 
-		return multa;
-
-	}
-
-	private static void cadastrarMulta() {
-		System.out.println();
+	private static void cadastrarMulta(Scanner tc) {
+		
 		System.out.println("==== Adicione os dados nescessários para o cadastramento da multa ====");
 		System.out.println();
 
@@ -90,11 +77,17 @@ public class MultasMenu {
 			System.err.println("Este veículo não está cadastrado");
 
 		} else {
-			Multa multa = MultasMenu.cadastrar(tc);
-			Condutor condutor = CondutorDAO.consultarCondutor(veiculo.getCondutor().getNroCnh());
-
-			multaDAO.criarMulta(multa, veiculo, condutor);
-
+		Multa multa = new Multa();
+		System.out.print("Valor: ");
+		double valor = tc.nextDouble();
+		System.out.print("Pontuação: ");
+		int pontuacao = tc.nextInt();
+		
+		multa.setValor(valor);
+		multa.setPontuacao(pontuacao);
+	    Condutor condutor = CondutorDAO.consultarCondutor(veiculo.getCondutor().getNroCnh());
+        multaDAO.criarMulta(multa, veiculo, condutor);
+       System.out.println(" multa cadastrada com sucesso!");
 		}
 	}
 

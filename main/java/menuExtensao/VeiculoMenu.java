@@ -15,9 +15,9 @@ public class VeiculoMenu {
 	private static final Condutor Condutor = null;
 	public static Scanner tc = new Scanner(System.in);
 	private static VeiculoDAO veiculoDAO = new VeiculoDAO();
-    private static CondutorDAO condutorDAO = new CondutorDAO();
-    
-	public static void  menu() {
+	private static CondutorDAO condutorDAO = new CondutorDAO();
+
+	public static void menu() {
 		System.out.println();
 		System.out.println("--------------------Menu veículo----------------------");
 		System.out.println();
@@ -34,7 +34,7 @@ public class VeiculoMenu {
 
 			switch (resp) {
 			case 1:
-				cadastrarVeiculo();
+				cadastrarcoVeiculo(tc);
 				break;
 
 			case 2:
@@ -63,52 +63,44 @@ public class VeiculoMenu {
 		}
 	}
 
-	public static void cadastrarVeiculo() {
+
+	public static void cadastrarcoVeiculo(Scanner tc)
+	{
 		System.out.println("====== Insira os dados nescessários para Cadastrar o veículo");
 		System.out.println();
-         Veiculo veiculo = VeiculoMenu.cadastrar(tc);
-         VeiculoDAO veiculodao = new VeiculoDAO();
-         veiculodao.criarVeiculo(veiculo, Condutor);
-         		
-
-		}
-
-	public static Veiculo cadastrar(Scanner tc) {
-        System.out.print("CNH do condutor: ");
-        int cnh = tc.nextInt();
+		System.out.print("CNH do condutor: ");
+		int cnh = tc.nextInt();
 		Condutor condutor = CondutorDAO.consultarCondutor((cnh));
-            if  (condutor == null) {
-            	System.err.println("Este condutor não está cadastrado");
-      }
-		else if (condutor.getVeiculo() != null) {
+		if (condutor == null) {
+			System.err.println("Este condutor não está cadastrado");
+		} else if (condutor.getVeiculo() != null) {
 			System.out.println();
 			System.err.println("Este condutor já possui um veículo cadastrado");
-
 		} else {
-		
-		Veiculo veiculo = new Veiculo();
-		System.out.print("Placa: ");
-		String placa = tc.next();
-		System.out.print("Modelo: ");
-		String modelo = tc.next();
-		System.out.print("Marca: ");
-		String marca = tc.next();
-		System.out.print("Ano: ");
-		int ano = tc.nextInt();
-       System.out.println("Veiculo cadastrado com sucesso! "
-        		+ "\nRedirecionando ao menu veiculos, aguarde :)");
-       		
-		veiculo.setPlaca(placa);
-		veiculo.setModelo(modelo);
-		veiculo.setMarca(marca);
-		veiculo.setAno(ano);
-		veiculo.setMultas(new ArrayList<Multa>());
-       
-        return veiculo;
-	}
-		return null;
-	}
+
+			Veiculo veiculo = new Veiculo();
+			System.out.print("Placa: ");
+			String placa = tc.next();
+			System.out.print("Modelo: ");
+			String modelo = tc.next();
+			System.out.print("Marca: ");
+			String marca = tc.next();
+			System.out.print("Ano: ");
+			int ano = tc.nextInt();
+			System.out.println("Veiculo cadastrado com sucesso! " + "\nRedirecionando ao menu veiculos, aguarde :)");
+
+			veiculo.setPlaca(placa);
+			veiculo.setModelo(modelo);
+			veiculo.setMarca(marca);
+			veiculo.setAno(ano);
+			veiculo.setMultas(new ArrayList<Multa>());
+        VeiculoDAO veiculodao = new VeiculoDAO();
+		veiculodao.criarVeiculo(veiculo, condutor);
+			
+		}
 	
+	}
+
 	private static void removerVeiculo() {
 		System.out.println();
 		System.out.println("=== Adicione os dados necessários para remoção ===");

@@ -1,4 +1,5 @@
 package br.com.mildevs;
+import java.security.PublicKey;
 import java.util.Scanner;
 
 import br.com.mildevs.dao.CondutorDAO;
@@ -13,13 +14,19 @@ import menuExtensao.VeiculoMenu;
 public class Program {
 
 	public static Scanner tc = new Scanner(System.in);
-
-	public static void main(String[] args) {;
-
+	private static VeiculoDAO veiculoDAO = new VeiculoDAO();
+	private static CondutorDAO condutorDAO = new CondutorDAO();
+	
+	public static void main(String[] args) {
+		menuPrincipal();
+	}
+	
+	public static Void menuPrincipal() {
+	
 		System.out.println("-------------------Escolha uma das opções abaixo:\n " + "(1) Informações/alterações sobre Condutores.\n"
 				+ "(2) Informações/aletrações sobre Veiculos.\n" + "(3) Informações/alterações sobre multas.\n"
 				+ "(4) Sair");
-
+		System.out.print("----Escolha uma opção: ");
 		int opcao = tc.nextInt();
 
 		switch (opcao) {
@@ -41,10 +48,13 @@ public class Program {
 			break;
 
 		case 5:
-			return;
-		default:
 			System.out.println("Opção inválida");
 			break;
+
 		}
+		return null;
+	
 	}
+	
 }
+

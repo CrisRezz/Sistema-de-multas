@@ -1,6 +1,8 @@
 package menuExtensao;
 
 import java.util.Scanner;
+
+import br.com.mildevs.Program;
 import br.com.mildevs.dao.CondutorDAO;
 import br.com.mildevs.dao.MultaDAO;
 import br.com.mildevs.dao.VeiculoDAO;
@@ -21,8 +23,9 @@ public class MultasMenu {
 		System.out.println("(1) Cadastrar multa.");
 		System.out.println("(2) Remover multa.");
 		System.out.println("(3) Consultar multa(s).");
-		System.out.println("(4) Listar multas.");
-		System.out.println("(5) Voltar para menu principal.");
+		System.out.println("(4) Listar multas de um veiculo.");
+		System.out.println("(5) Listar multas.");
+		System.out.println("(6) Voltar para menu principal.");
 		System.out.println();
 		System.out.print("Escolha uma opção: ");
 
@@ -51,7 +54,7 @@ public class MultasMenu {
 				break;
 
 			case 6:
-
+                 Program.menuPrincipal();
 				return;
 
 			default:

@@ -104,5 +104,6 @@ public class Veiculo {
 		return "\nPlaca: " + placa + "\nModelo: " + modelo + " " + ano + "\nMarca: " + marca + "\nCNH do proprietário: "
 				+ condutor.getNroCnh();
 
+	
 	}
 }

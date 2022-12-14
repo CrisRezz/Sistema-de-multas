@@ -3,6 +3,8 @@ package menuExtensao;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
+
+import br.com.mildevs.Program;
 import br.com.mildevs.dao.CondutorDAO;
 import br.com.mildevs.entity.Condutor;
 
@@ -44,6 +46,7 @@ public class CondutorMenu {
 				break;
 
 			case 5:
+				 Program.menuPrincipal();
 				return;
 
 			default:

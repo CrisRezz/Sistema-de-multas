@@ -3,6 +3,7 @@ package br.com.mildevs.dao;
 import java.util.List;
 
 import br.com.mildevs.entity.Condutor;
+import br.com.mildevs.entity.Multa;
 import br.com.mildevs.entity.Veiculo;
 
 import jakarta.persistence.EntityManager;
@@ -15,6 +16,7 @@ public class VeiculoDAO {
 	public VeiculoDAO() {
 		VeiculoDAO.manager = Persistence.createEntityManagerFactory("Multa").createEntityManager();
 		CondutorDAO condutorDAO = new CondutorDAO();
+		
 	}
 
 	// criar
@@ -54,11 +56,46 @@ public class VeiculoDAO {
 		Veiculo VeiculoASerRemovido = manager.find(Veiculo.class, placa);
 		if (VeiculoASerRemovido == null)
 			return false;
-
+		else {
+		Condutor condutor = VeiculoASerRemovido.getCondutor();
+		condutor.setVeiculo(null);
 		manager.getTransaction().begin();
 		manager.remove(VeiculoASerRemovido);
+		manager.merge(condutor);
 		manager.getTransaction().commit();
+		System.out.println("Veiculo removido com sucesso!");
 		return true;
-
+		}
 	}
-}
+	
+	
+	public void venderVeiculo(Condutor vendedor, Condutor comprador, Veiculo veiculo) {	
+		veiculo.setCondutor(comprador);
+		vendedor.setVeiculo(null);
+		
+		if (comprador.getVeiculo() != null) {
+			String placaAntiga = comprador.getVeiculo().getPlaca();
+			Veiculo veiculoAntigo = manager.find(Veiculo.class, placaAntiga);
+			
+			comprador.setVeiculo(veiculo);
+			
+			manager.getTransaction().begin();
+			manager.merge(vendedor);
+			manager.merge(comprador);
+			manager.merge(veiculo);
+			manager.remove(veiculoAntigo);
+			manager.getTransaction().commit();
+			
+		} else {
+			comprador.setVeiculo(veiculo);
+			manager.getTransaction().begin();
+			manager.merge(vendedor);
+			manager.merge(comprador);
+			manager.merge(veiculo);
+			manager.getTransaction().commit();
+
+		}
+		
+	}
+	}
+	

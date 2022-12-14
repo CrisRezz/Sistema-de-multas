@@ -1,0 +1,48 @@
+============================= FETCH =================================================
+ FetchType é uma propriedade usada para definir estratégias de busca 
+ que são usadas para otimizar a instrução select gerada pelo Hibernate, 
+ para que ela seja o mais eficiente possível.
+ Existem dois tipos de fetch, Eager (FetchType.EAGER) ou Lazy (FetchType.LAZY); 
+
+ colocamos a anotação sob a entidade relacionada e ela  determina se
+ a entidade atual deve ser inicializada imediatamente quando inicializada(FetchType.EAGER).
+ ou somente sob demanda (@FetchType.LAZY).
+
+ ou seja (FetchType.EAGER): Puxa todos os objetos do BD assim que inicializado.
+ e(@FetchType.LAZY) : Puxa apenas objetos  quando solicitado.
+
+
+============================ CASCADE ===========================================
+ CascadeType é uma propriedade usada para definir a cascata em um relacionamento entre um pai e um filho.
+
+  Existem seis tipos de cascades (CascadeType) na especificação do JPA. São eles:
+
+     ALL = Realiza todas as operações do cascade (MERGE, PERSIST, REFRESH e REMOVE).
+    ---------------------------------------------------
+     DETACH = "A operação de desanexação remove a entidade do contexto persistente. 
+     Quando usamos CascaseType.DETACH,a entidade filha também é removida do contexto persistente".
+    ------------------------------------------------
+     MERGE =  Ele propaga a operação de atualização de um objeto Pai para um objeto Filho,
+     assim quando atualizadas as informações da Entidade Cliente, também será atualizado 
+     no banco de dados todas as informações das Entidades Telefone associadas.
+    ----------------------------------------------
+     PERSIST =  Ele propaga a operação de persistir um objeto Pai para um objeto Filho,
+     assim quando salvar a Entidade Cliente,
+     também será salvo todas as Entidades Telefone associadas.
+     ------------------------------------------------------------------
+     
+     REFRESH = Ele propaga a operação de recarregar de um objeto Pai para um objeto Filho,
+     assim, quando houver atualização no banco de dados na Entidade Cliente, 
+     todas as entidades Telefone associadas serão recarregadas do banco de dados.
+    ----------------------------------------------------------
+     REMOVE =  Ele propaga a operação de remoção de um objeto Pai para um objeto Filho, 
+     assim quando remover a Entidade Cliente,
+     também será removida todas as entidades Telefone associadas.
+ 
+ ============================== OPTIONAL =======================================
+ Serve para definir se uma entidade relacionada será nula (true) ou não (false);
+ Optional pode evitar o erro NullPointerException, pois por padrão é true, fazendo assim 
+ com que outras entidades relacionadas não precisem necessariamente ter dados salvos
+ caso nenhuma informação tenha sido preenchida. 
+ 
+ 
